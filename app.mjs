@@ -31,6 +31,10 @@ async function saveFullpageScreenshot() {
     await page.evaluate(()=>{
         window.scrollTo(0,document.body.scrollHeight)
     })
+    // scroll to bottom missed header, top navigation bar on screenshot. trying scroll to top again
+    await page.evaluate(()=>{
+        window.scrollTo(0,0)
+    })
     await page.screenshot(
         {
             path:'prothom-alo.png', 
