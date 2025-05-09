@@ -24,8 +24,19 @@ async function saveFullpageScreenshot() {
     })
         
     const recorder = await page.screencast({path:'recording.webm'})
-    await page.goto('https://www.prothomalo.com/')
-    await page.screenshot({path:'prothom-alo.png', fullPage: true})
+    await page.goto('https://www.prothomalo.com/',{
+        waitUntil:'networkidle2'
+    })
+    //now scroll to bottom of the page
+    await page.evaluate(()=>{
+        window.scrollTo(0,document.body.scrollHeight)
+    })
+    await page.screenshot(
+        {
+            path:'prothom-alo.png', 
+            fullPage: true
+        }
+    )
     await recorder.stop()
     await page.close()
     await browser.close()
