@@ -1,25 +1,28 @@
 import puppeteer from 'puppeteer'
 
 
+try{
+    await saveFullpageScreenshot()
+}catch(err){
+    console.log(err)
+}
 
-await puppeteerShell()
-
-async function puppeteerShell() {
+async function saveFullpageScreenshot() {
     console.log('OPENING Browser')
     const browser = await puppeteer.launch(
         {
             headless: false,
             slowMo:500,
-            args:[`--start-maximized`]
+            args:[`--start-maximized`,`--disable-notifications`]
         }
     )
-    // args :[`--disable-notifications`]
     const page   = await browser.newPage()
     await page.setViewport({
-        width:1920,
-        height:1080,
+        width:1280,
+        height:720,
         deviceScaleFactor:1
     })
+        
     const recorder = await page.screencast({path:'recording.webm'})
     await page.goto('https://www.prothomalo.com/')
     await page.screenshot({path:'prothom-alo.png', fullPage: true})
