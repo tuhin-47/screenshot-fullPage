@@ -12,22 +12,25 @@ async function saveFullpageScreenshot() {
     const browser = await puppeteer.launch(
         {
             headless: false,
-            slowMo:500,
-            args:[`--start-maximized`,`--disable-notifications`]
+            defaultViewport: null
         }
     )
+    //args:[`--start-maximized`,`--disable-notifications`]
     const page   = await browser.newPage()
+    /*
     await page.setViewport({
         width:1280,
         height:720,
         deviceScaleFactor:1
     })
+    */
         
     const recorder = await page.screencast({path:'recording.webm'})
     await page.goto('https://www.prothomalo.com/',{
         waitUntil:'networkidle2'
     })
     //now scroll to bottom of the page
+    /*    
     await page.evaluate(()=>{
         window.scrollTo(0,document.body.scrollHeight)
     })
@@ -35,6 +38,17 @@ async function saveFullpageScreenshot() {
     await page.evaluate(()=>{
         window.scrollTo(0,0)
     })
+    */
+   
+    // trying code from chatgpt...
+
+    const body = await page.$('body')
+    const { height } = await body.boundingBox()
+    await body.dispose()
+
+    await page.setViewport({width:1280,height:Math.ceil(height)})
+    // GPT Code ENDs here.... It's working
+
     await page.screenshot(
         {
             path:'prothom-alo.png', 
