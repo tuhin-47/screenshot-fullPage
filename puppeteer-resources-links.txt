@@ -1,0 +1,10 @@
+puppeteer resource link:
+------------------------
+[puppeteer github repo] https://github.com/puppeteer/puppeteer
+[Official Guide by the Chrome Team] https://developer.chrome.com/docs/puppeteer?hl=en
+[*] https://puppeteer.guide/
+
+
+https://www.freecodecamp.org/news/how-to-use-puppeteer-with-nodejs
+https://www.digitalocean.com/community/tutorials/tooling-puppeteer
+https://headlessbrowsers.com/puppeteer/
